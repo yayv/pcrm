@@ -20,5 +20,8 @@ My Personal CRM System
 先用php来实现吧。
 
 
+*注，这个项目依赖于我的另一个小框架 tinycake ， 可以参考一下。
+
+
 
 
