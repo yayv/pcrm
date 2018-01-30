@@ -1,0 +1,39 @@
+	            <form  method='post' action='/plugins/appendlog' style='padding:10px;margin:5px;background-color:#DDD' >
+	            	<input type='hidden' name='personid' value='{$person.id}'>
+	            	<div class='form-inline'>
+					<div class="form-group" >
+					<label class="sr-only" for="InputStartDate">YYYY-MM-DD</label>
+					<input name='date' type="date" class="form-control" id="InputStartDate" value="{$today}">
+					</div>
+					<input class='typ' type='radio' name='typ' value='log' checked=checked>记录
+					<input class='typ' type='radio' name='typ' value='notify'>提醒
+					<input class='typ' type='radio' name='typ' value='todo'>待做
+					<input class='typ' type='radio' name='typ' value='birthday'>生日
+					</div>
+
+	            	<div class='form-inline' style='height:26px;display:none;' id='noti-detail'>
+					<div class="form-group" >
+					<label class="sr-only" for="InputStartDate">YYYY-MM-DD</label>
+					</div>
+					<input class='noti' type='radio' name='notify' value='noti_year'>每年 
+					<input class='noti' type='radio' name='notify' value='noti_month'>每月 
+					<input class='noti' type='radio' name='notify' value='noti_week'>每周 
+					</div>
+
+					<div class="form-group form-horizontal">
+					<label class="sr-only" for="InputStartDate">YYYY-MM-DD</label>
+					<textarea name='note' type="date" class="form-control" id="InputStartDate" placeholder="输入这一天所发生的事情"></textarea>
+					</div>
+
+	            	<button class='btn btn-default'>添加记录</button>
+            	</form>
+            	<ul>
+            		{section loop=$mlog name=i}
+            		<li>
+            			<i class='label label-warning' style='color:black;'>{$mlog[i].date}</i>
+            			<span>{$mlog[i].content}
+            			</span>
+            		</li>
+            		{/section}
+            	</ul>
+            	

@@ -1,0 +1,46 @@
+用户:{$owner.name}
+<div class="btn-group">
+    <button class="btn">待做列表</button>
+    <button class="btn">列出信息不完整的</button>
+    <a class="btn" href='/pcrm/thousandKill'>千人斩</a>
+    <button class="btn">高评分的准客户</button>
+    <button class="btn">保障不足的客户</button>
+    <a class="btn" href='/pcrm/addPerson'>添加新用户</a>
+</div>
+
+<div class='row' style='margin-top:30px;'>
+	<div class='span8'>
+		{section name=person loop=$personlist}
+		<div class='row'>
+		<div class='span2'><a href='/pcrm/personinfo/?personid={$personlist[person].id}'>{$personlist[person].name}({$personlist[person].nickname})</a></div><div class='span11'></div>
+		</div>
+		{/section}
+	</div>
+
+
+	<div class='span3' > 
+	<pre>
+// TODO: 增加用户扩充信息
+// TODO: 实现本月事件提醒
+// TODO: 实现本周事件提醒
+// TODO: 实现当日事件提醒
+
+// TODO: 实现信息统计,包括: 上周平均每日新增名单数, 上周联系人信息更新量, 上周拜访记录更新量
+// TODO: 考虑 每日提醒 功能的实现
+
+// TODO: 增加个人信息, 方便投保
+身高 体重 疾病史, 甚至工作 职位 收入的变化,需要做历史记录吗?
+
+受益人姓名 受益人所占百分比 受益人身份证号 受益人与被保险人关系
+
+投保人账户授权
+账户姓名(要求与投保人相同) 身份证号 银行名称 银行账号
+
+个人保障汇总表使用注意
+// TODO: 1. 每项都应该带保障的起止日期, 开始时间应该是最后生效的保单生效日期,结束时间应该是最早结束的保单结束日期
+// TODO: 2. 此表应为自动统计的结果,备注也应该有个自动汇总的功能
+// TODO: 3. 一类重疾,二类重疾,应该以保障期内最窄的保障为示例
+
+	</pre>
+	</div>
+</div>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>{$title}</title>
+		<meta name='viewport' content="width=device-width, initial-scale=1.0"/>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" /> 
+		<link href='/v/bootstrap3/css/bootstrap.min.css' rel='stylesheet' media='screen'>
+	</head>
+<body>
+
+{$navigatebar}
+
+<div class="container">
+{$body}
+</div>
+
+{* <script src='http://code.jquery.com/jquery.js'></script> *}
+<script src='/v/bootstrap3/js/jquery.js'></script>
+<script src='/v/bootstrap3/js/bootstrap.min.js'></script>
+<script src='/v/typeahead.js/js/typeahead.min.js'></script>
+<script>
+{literal}
+$(document).ready(function(){
+    if('function'==typeof(header_ready)) header_ready();
+    if('function'==typeof(body_ready))   body_ready();
+    if('function'==typeof(footer_ready)) footer_ready();
+
+    $("a[href=#infoModal]").click(function(){
+        $("#infoModal").load($(this).attr("data-url"));
+    });
+
+    /*
+	$('input.typeahead').typeahead([
+		{
+	  		name: 'names',
+	  		prefetch: '/person/names.json'
+		},
+		{
+			name: 'phone',
+			prefetch: '/person/phones.json',
+		}
+	]);
+	*/
+
+});
+
+
+{/literal}
+</script>
+
+<!-- div class="modal hide fade" id="infoModal" ></div -->
+<div 
+	id="infoModal" class="modal hide fade" tabindex="-1" 
+	role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+</div>
+</body>
+</html>
+

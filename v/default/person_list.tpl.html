@@ -1,0 +1,32 @@
+<div class='row'>
+
+<ul class="list-group">
+  <li class="list-group-item">
+  	<form class='form-inline' method='POST'>
+  	<span class='form-group'>
+  		<input class='form-control' type='text' name='name' >
+  	</span>
+
+  	<div class='form-group'>
+  	<button class='btn btn-default'> &nbsp; Go &nbsp;<span class="badge">{$count}</span></button>
+  	</div>
+  	<div class='form-group'>
+  	<a class='btn btn-default' href='/person/add'> &nbsp; Add &nbsp;</a>
+  	</div>
+  	</form>
+  </li>
+{section loop=$persons name=i}
+  <li class="list-group-item"><a href='/personinfo/show?id={$persons[i].id}'>{$persons[i].name}({$persons[i].nickname})</a></li>
+{/section}
+</ul>
+
+
+</div>
+
+<script>
+{literal}
+
+{/literal}
+</script>
+
+

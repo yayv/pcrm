@@ -1,0 +1,42 @@
+<div class='row'>
+
+<ul class="pager">
+  <li class='previous'><a href="/person/all?start={$start-4}">Previous</a></li>
+  <li class='next'><a href="/person/all?start={$start+4}">Next</a></li>
+</ul>
+
+{foreach from=$persons item=person}
+<div class='panel panel-default col-xs-5' style='padding:5px;margin:5px;'>
+	<div class="panel-heading">
+		<label class='panel-title'>{$person.id} ({$person.nickname})</label>
+		<label class='pull-right'><a href='/personinfo/show?id={$person.id}'>查看</a></label>
+	</div>
+
+	<div class='panel-body'>
+		<h3><b>{$person.name}</b> <span style='font-size:19px;'>{$person.job_title}</span></h3>
+		<div>
+			<span style='font-weight:bold;'>电话:</span>
+			<span>{$person.mobile1}</span> , <span>{$person.mobile2}</span>
+		</div>
+
+		<div>
+				<span style='font-weight:bold;'>邮箱:</span>
+			<span>{$person.email}</span>
+		</div>
+
+		<h4>{$person.company} </h4>
+		<span>{$person.company_address}</span>
+		<span>{$person.company_zipcode}</span>
+	</div>
+
+</div>
+{/foreach}
+</div>
+
+<script>
+{literal}
+
+{/literal}
+</script>
+
+

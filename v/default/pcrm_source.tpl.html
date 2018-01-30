@@ -1,0 +1,47 @@
+<div class='span7'>
+<form method='POST' action='/pcrm/updateSource/'>
+	<input type='hidden' name='personid' value='{$source.id}'>
+<div class='row'>
+	<div class='span12'><h1 class='span2'>客户来源:</h1><h3 class='span4'>{$source.name}({$source.nickname})</h3></div>
+</div>
+
+<div class='row'>
+	<div class='span2' style='text-align:right;'><h2>来源类型</h2></div>
+	<div class='span4 offset1'><input style='font-size:24px;' name='type' value='{$source.source_type}'></div>
+</div>
+
+<div class='row'>
+	<div class='span2' style='text-align:right;'><h2>来源编号</h2></div>
+	<div class='span4 offset1'><input style='font-size:24px;' name='id' value='{$source.source_id}'></div>
+</div>
+
+<div class='row'>
+	<div class='span2' style='text-align:right;'><h2>来源客户</h2></div>
+	<div class='span4 offset1'><input onkeyup='find(this)' style='font-size:24px;' name='name' value='{$source.source_name}'></div>
+</div>
+
+<div class='row'>
+	<div class='span2' style='text-align:right;'><h2>来源关系</h2></div>
+	<div class='span4 offset1'><input style='font-size:24px;' name='relationship' value='{$source.source_relationship}'></div>
+</div>
+
+<button class='span2 offset3 btn btn-large'>保存</button>
+</form>
+</div>
+<div class='span2' id='tip'>
+</div>
+<script type='text/javascript'>
+{literal}
+function find(me)
+{
+	var text = '';
+	$.getJSON('/pcrm/getPersonNamesLike/?like='+me.value,function(data){
+		$.each(data, function(key,val){
+			text += '<div class="row">'+val.id+':'+val.name+'('+val.nickname+')</div>';
+		});
+		$('#tip').html(text);
+	});
+	
+}
+{/literal}
+</script>

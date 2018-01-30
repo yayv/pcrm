@@ -1,0 +1,10 @@
+
+<div class='row'>
+<form method='POST' action='/pcrm/updateComment/?id={$person.id}'>
+	<span class='span12'><input type='hidden' name='personid' value='{$person.id}'></span>
+	<textarea class='span12' style='height:250px;' name='comment'>{$person.comment}</textarea>
+
+	<button class='span2 btn btn-primary btn-large' name='supply_personalinfo'>保存备注</button>
+	<button class='span2 btn btn-large' name='supply_personalinfo'><a href="/pcrm/personinfo/?personid={$person.id}">返回</a></button>
+</form>
+</div>

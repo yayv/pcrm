@@ -1,0 +1,146 @@
+<div class='row'>
+<div class='col-xs-6' style='padding:5px;'>
+	<div>
+		<b>Tags:</b>
+		<span id='links' data-role='tags'>
+		{section loop=$tags name=i}
+			<a href='/tags/{$tags[i]}'>{$tags[i]}</a>
+			{if not $smarty.section.i.last},{/if}
+		{/section}</span>
+		<span id='edittags' class='hidden' class='text'>
+		{section loop=$tags name=i}
+			{$tags[i]}{if not $smarty.section.i.last},{/if}
+		{/section}</span>
+		</span>
+		| <a id='btnedit' href='#' onclick='return edittags()'>编辑</a>
+		<a id='btnsave' class='btn btn-primary hidden' href='#' onclick='return savetags()'>保存</a>
+		<a id='btncancel' class='btn btn-default hidden' href='#' onclick='return cancel()'>取消</a>
+		<br/>
+	</div>
+	<br/>
+	<div class='panel panel-default'>
+		{*style='border:solid 1px black;background-color:#EEFFDD;padding:8px;border-radius:8px;'>*}
+		<div class="panel-heading">
+			<label class='panel-title'>{$person.id} ({$person.nickname})</label>
+			<label class='pull-right'><a href='/personinfo/edit?id={$person.id}'>编辑</a></label>
+		</div>
+
+		<div class='panel-body'>
+			<h3><b>{$person.name}</b> <span style='font-size:19px;'>{$person.job_title}</span></h3>
+			<div>
+				<span style='font-weight:bold;'>电话:</span>
+				<span>{$person.mobile1}</span> , <span>{$person.mobile2}</span>
+			</div>
+
+			<div>
+				<span style='font-weight:bold;'>邮箱:</span>
+				<span>{$person.email}</span>
+			</div>
+
+			<h4>{$person.company} </h4>
+			<span>{$person.company_address}</span>
+			<span>{$person.company_zipcode}</span>
+		</div>
+		<div class='panel-footer'>
+			{$person.comment}
+		</div>
+	</div>
+
+	<div >
+		{if $havenotify}
+		<b class='label label-info'>提醒</b>
+		{/if}
+	</div>
+
+</div>
+<div class='col-xs-6' id='right-tip'>
+       <ul id="mytab" class="nav nav-tabs">
+       		{section loop=$panels name=j}
+            <li {if $smarty.section.j.first}class="active"{/if}><a href="#{$panels[j].code}" data-toggle="tab">{$panels[j].name}</a></li>
+            {/section}
+            {*
+            <li><a href="#Insurance" data-toggle="tab">保障</a></li>
+            <li><a href="#Personal" data-toggle="tab">个人履历</a></li>
+            <li><a href="#Family" data-toggle="tab">关系</a></li>
+            <li><a href="#Notify" data-toggle="tab">提醒</a></li>
+            *}
+        </ul>
+
+        <div class="tab-content">
+        	{section loop=$panels name=k}
+            <div class="tab-pane {if $smarty.section.k.first}active{/if}" id="{$panels[k].code}">
+            		{include file=$panels[k].template}
+            </div>
+            {/section}
+        </div>
+</div>
+
+<script>
+var personid={$person.id};
+{literal}
+function body_ready()
+{
+	$('.typ').change(function()
+	{
+		if($(this).val()=='notify')
+		{
+			$('#noti-detail').show();
+		}
+		else
+			$('#noti-detail').hide();
+	});
+}
+
+function doaddlifestage(form)
+{
+	$.post('/personinfo/addStage',
+			$("form[id='lifestageform']").serialize(),
+			function(data){
+
+			},
+			'json');
+}
+
+function edittags()
+{
+	// TODO: 编辑标签时，应该给一个已有标签的提示
+	$('#edittags').removeClass('hidden').attr('contenteditable','true').focus();
+	$('#links').addClass('hidden');
+
+	$('#btnedit').addClass('hidden');
+	$('#btnsave').removeClass('hidden');
+	$('#btncancel').removeClass('hidden');
+
+	return false;
+}
+function savetags()
+{
+	$.post(
+		'/tags/jupdate',
+		{'id':personid,'value':$('#edittags').text()},
+		function(data){
+			if(data.ret)
+			{
+				$('#links').html(data.html);
+				$('#edittags').text(data.text);
+			}
+		},
+		'json');
+	cancel();
+
+	return false;
+}
+function cancel()
+{
+	$('#edittags').addClass('hidden');
+	$('#links').removeClass('hidden');
+
+	$('#btnedit').removeClass('hidden');
+	$('#btnsave').addClass('hidden');
+	$('#btncancel').addClass('hidden');
+
+	return false;
+}
+{/literal}
+</script>
+

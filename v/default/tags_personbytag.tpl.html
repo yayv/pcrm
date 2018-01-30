@@ -1,0 +1,15 @@
+<div class='row'>
+<h2>{$tag}({$count})</h2>
+{section loop=$persons name=i}
+	<a href='/personinfo/show/id-{$persons[i].id}'>{$persons[i].name}({$persons[i].nickname})</a><br/>
+{/section}	
+
+</div>
+
+<script>
+{literal}
+
+{/literal}
+</script>
+
+

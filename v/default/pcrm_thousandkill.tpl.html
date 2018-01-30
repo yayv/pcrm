@@ -1,0 +1,34 @@
+用户:{$owner.name}
+<div class="btn-group">
+    <button class="btn">待做列表</button>
+    <button class="btn">列出信息不完整的</button>
+    <a class="btn" href='/pcrm/thousandKill'>千人斩</a>
+    <button class="btn">高评分的准客户</button>
+    <button class="btn">保障不足的客户</button>
+    <a class="btn" href='/pcrm/addPerson'>添加新用户</a>
+</div>
+
+<div class='row' style='margin-top:30px;'>
+	<span class='span2'>已加入人数:</span><span class='span1'>{$total}</span><span class='span9'>&nbsp;</span>
+
+	<span class='span2'>信息不完整人数:</span><span class='span1'>{$total_todo}</span><span class='span9'>&nbsp;</span>
+
+	<div class='span12'>
+		已加入人数:{$total}
+	</div>
+</div>
+<div class='row'>
+	<div class='span8'>
+		{section name=person loop=$personlist}
+		<div class='row'>
+		<div class='span2'><a href='/pcrm/personinfo/?personid={$personlist[person].id}'>{$personlist[person].name}({$personlist[person].nickname})</a></div><div class='span11'></div>
+		</div>
+		{/section}
+	</div>
+
+	<div class='span3' > 
+	<pre>
+
+	</pre>
+	</div>
+</div>

@@ -1,0 +1,256 @@
+
+<div class='row' style='line-height:180%;'>
+<form method='POST' action='/pcrm/updateBasic/?id={$person.id}'>
+	<input type='hidden' name='personid' value='{$person.id}'>
+	<div class='row'>
+		<div class='span2 text-right'>姓名</div>
+		<div class='span3'><input name='name' value='{$person.name}'></div>
+	</div>
+	<div class='row'>
+		<div class='span2 text-right'>昵称</div>
+		<div class='span3'><input name='nickname' value='{$person.nickname}'></div>
+	</div>
+	<div class='row'>
+		<div class='span2 text-right'>英文名</div>
+		<div class='span3'><input name='english_name' value='{$person.english_name}'></div>
+	</div>
+	<div class='row'>
+		<div class='span2 text-right'>性别</div>
+		<div class='span3'>
+			<input type=radio name=gender value='male' {if $person.gender=='male'}checked{/if}>男
+			<input type=radio name=gender value='female' {if $person.gender=='female'}checked{/if}>女
+		</div>
+	</div>
+	<div class='row'>
+		<div class='span2 text-right'>性格类型</div>
+		<div class='span3'><input name='nature' value='{$person.nature}'></div>
+	</div>
+	<div class='row'>
+		<div class='span2 text-right'>保险观念</div>
+		<div class='span3'><input name='attitude' value='{$person.attitude}'></div>
+	</div>
+	<div class='row'>
+		<div class='span2 text-right'>生日</div>
+		<div class='span3'><input name='birthday' value='{$person.birthday}'></div>
+		<div class='span2 text-left' ><label class="checkbox"><input type='checkbox' name='confirm_birthday' {if $person.confirm_birthday==1}checked{/if}>已确认准确</label></div>
+	</div>
+	<div class='row'>
+		<div class='span2 text-right'>家乡</div>
+		<div class='span3'><input name='hometown' value='{$person.hometown}'></div>
+	</div>
+	<div class='row'>
+		<div class='span2 text-right'>证件类型</div>
+		<div class='span3'>
+			<label>
+				<select name='idcard_type' value='{$person.idcard_type}'>
+					<option {if '身份证'==$person.idcard_type}selected{/if}>身份证</option>
+					<option {if '驾驶证'==$person.idcard_type}selected{/if}>驾驶证</option>
+					<option {if '军官证'==$person.idcard_type}selected{/if}>军官证</option>
+					<option {if '护照'==$person.idcard_type}selected{/if}>护照</option>
+				</select>
+			</label>			
+		</div>
+	</div>
+	<div class='row'>
+		<div class='span2 text-right'>证件号</div>
+		<div class='span3'><input name='idcard_no' value='{$person.idcard_no}'></div>
+	</div>
+	<div class='row'>
+		<div class='span2 text-right'>户籍所在地</div>
+		<div class='span3'><input name='household_register' value='{$person.household_register}'></div>
+	</div>
+	<div class='row'>
+		<div class='span2 text-right'>手机1</div>
+		<div class='span3'><input name='mobile1' value='{$person.mobile1}'></div>
+	</div>
+	<div class='row'>
+		<div class='span2 text-right'>手机2</div>
+		<div class='span3'><input name='mobile2' value='{$person.mobile2}'></div>
+	</div>
+	<div class='row'>
+		<div class='span2 text-right'>手机3</div>
+		<div class='span3'><input name='mobile3' value='{$person.mobile3}'></div>
+	</div>
+	<div class='row'>
+		<div class='span2 text-right'>email1</div>
+		<div class='span3'><input name='email1' value='{$person.email1}'></div>
+	</div>
+	<div class='row'>
+		<div class='span2 text-right'>email2</div>
+		<div class='span3'><input name='email2' value='{$person.email2}'></div>
+	</div>
+
+	{* ------------------ *}
+	<div class='row'><br/></div>
+	<div class='row'>
+		<div class='span2 text-right'>银行1</div>
+		<div class='span3'><input name='bank1' value='{$person.bank1}'></div>
+	</div>
+	<div class='row'>
+		<div class='span2 text-right'>账号1</div>
+		<div class='span3'><input name='account1' value='{$person.account1}'></div>
+	</div>
+	<div class='row'>
+		<div class='span2 text-right'>银行2</div>
+		<div class='span3'><input name='bank2' value='{$person.bank2}'></div>
+	</div>
+	<div class='row'>
+		<div class='span2 text-right'>账号2</div>
+		<div class='span3'><input name='account2' value='{$person.account2}'></div>
+	</div>
+	<div class='row'>
+		<div class='span2 text-right'>银行3</div>
+		<div class='span3'><input name='bank3' value='{$person.bank3}'></div>
+	</div>
+	<div class='row'>
+		<div class='span2 text-right'>账号3</div>
+		<div class='span3'><input name='account3' value='{$person.account3}'></div>
+	</div>
+	<div class='row'><br/></div>
+	{* ------------------ *}
+
+	<div class='row'>
+		<div class='span2 text-right'>住址</div>
+		<div class='span3'><input name='address' value='{$person.address}'></div>
+		<div class='span2'>(具体到门牌号)</div>
+	</div>
+	<div class='row'>
+		<div class='span2 text-right'>住址邮编</div>
+		<div class='span3'><input name='address_zipcode' value='{$person.address_zipcode}'></div>
+		<div class='span2'>(具体到门牌号)</div>
+	</div>
+	<div class='row'>
+		<div class='span2 text-right'>公司</div>
+		<div class='span3'><input name='company' value='{$person.company}'></div>
+		<div class='span2'>(没有填无)</div>
+	</div>
+	<div class='row'>
+		<div class='span2 text-right'>公司地址</div>
+		<div class='span3'><input name='company_address' value='{$person.company_address}'></div>
+		<div class='span2'>(没有填无)</div>
+	</div>
+	<div class='row'>
+		<div class='span2 text-right'>公司邮编</div>
+		<div class='span3'><input name='company_zipcode' value='{$person.company_zipcode}'></div>
+		<div class='span2'>(没有填无)</div>
+	</div>
+	<div class='row'>
+		<div class='span2 text-right'>部门</div>
+		<div class='span3'><input name='department' value='{$person.department}'></div>
+		<div class='span2'>(没有填无)</div>
+	</div>
+	<div class='row'>
+		<div class='span2 text-right'>行业</div>
+		<div class='span3'><input name='vocation' value='{$person.vocation}'></div>
+		<div class='span2'>(没有填无)</div>
+	</div>
+
+	<div class='row'>
+		<div class='span2 text-right'>职务</div>
+		<div class='span3'><input name='job' value='{$person.job}'></div>
+		<div class='span2'>(没有填无)</div>
+	</div>
+
+	<div class='row'>
+		<div class='span2 text-right'>职位</div>
+		<div class='span3'><input name='job_title' value='{$person.job_title}'></div>
+		<div class='span2'>(没有填无)</div>
+	</div>
+
+	<div class='row'>
+		<div class='span2 text-right'>年收入</div>
+		<div class='span3'><input name='income' value='{$person.income}'></div>
+		<div class='span2'>(含工资,奖金,红利,分红等)</div>
+	</div>
+
+	{* ---------------------------------------------------- *}
+	<div class='row'>&nbsp;</div>
+
+
+	<div class='row'>
+		<div class='span2 text-right'>居住类型</div>
+		<div class='span3'><input name='residence' value='{$person.residence}'></div>
+		<div class='span2'>租房2居/自购3居/</div>
+	</div>
+
+	<div class='row'>
+		<div class='span2 text-right'>婚姻状况</div>
+		<div class='span3'>
+			<label>
+				<select name='marital' value='{$person.marital}'>
+					<option {if $person.marital=='未知'}selected{/if}>未知</option>
+					<option {if $person.marital=='已婚'}selected{/if}>已婚</option>
+					<option {if $person.marital=='未婚'}selected{/if}>未婚</option>
+					<option {if $person.marital=='离异'}selected{/if}>离异</option>
+				</select>
+			</label>
+		</div>
+		<div class='span3'>
+			<label>孩子:
+				<select name='children' value='{$person.children}' style='width:50px;'>
+					<option {if $person.children==0}selected{/if}>0</option>
+					<option {if $person.children==1}selected{/if}>1</option>
+					<option {if $person.children==2}selected{/if}>2</option>
+					<option {if $person.children==3}selected{/if}>3</option>
+					<option {if $person.children==4}selected{/if}>4</option>
+					<option {if $person.children==5}selected{/if}>5</option>
+					<option {if $person.children==6}selected{/if}>6</option>
+					<option {if $person.children==7}selected{/if}>7</option>
+					<option {if $person.children==8}selected{/if}>8</option>
+					<option {if $person.children==9}selected{/if}>9</option>
+				</select>个
+			</label>
+		</div>
+	</div>
+
+	<div class='row'>
+		<div class='span2 text-right'>相识年月</div>
+		<div class='span3'><input name='acquaint_time' value='{$person.acquaint_time}'></div>
+	</div>
+
+	<div class='row'>
+		<div class='span2 text-right'>交往程度</div>
+		<div class='span3'>
+			<label><select name='contact_degree'>
+				<option {if '亲密朋友'==$person.contact_degree}selected{/if}>亲密朋友</option>
+				<option {if '普通朋友'==$person.contact_degree}selected{/if}>普通朋友</option>
+				<option {if '泛泛之交'==$person.contact_degree}selected{/if}>泛泛之交</option>
+			</select></label>
+		</div>
+	</div>
+
+	<div class='row'>
+		<div class='span2 text-right'>去年见面次数</div>
+		<div class='span3'><input name='meet_times' value='{$person.meet_times}'></div>
+	</div>
+
+	<div class='row'>
+		<div class='span2 text-right'>接洽对方难度</div>
+		<div class='span3'>
+			<label>
+				<select name='engagement_diffcult' value='{$person.engagement_diffcult}'>
+					<option {if '非常容易'==$person.engagement_diffcult}selected{/if}>非常容易</option>
+					<option {if '容易'==$person.engagement_diffcult}selected{/if}>容易</option>
+					<option {if '困难'==$person.engagement_diffcult}selected{/if}>困难</option>
+					<option {if '非常困难'==$person.engagement_diffcult}selected{/if}>非常困难</option>
+				</select>
+			</label>
+		</div>
+	</div>
+
+	<div class='row'>
+		<div class='span2 text-right'>推荐客户能力</div>
+		<div class='span3'>
+			<lable><select name='recommend_ability' value='{$person.recommend_ability}'>
+				<option>很好</opton>
+				<option>还可以</opton>
+				<option>可以</opton>
+				<option>不可能</opton>
+			</select></label>
+		</div>
+	</div>
+
+<button class='span2 offset2 btn btn-large' name='supply_personalinfo'>补充个人信息</button>
+<button class='span2 offset2 btn btn-large' name='update_personalstatus'>更新客户状态</button>
+</form>
+</div>

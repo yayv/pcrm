@@ -1,0 +1,175 @@
+<div class='row'>
+<div class='col-xs-6' style='padding:5px;'>
+	<div class='label label-default'>写访问记录</div>
+	<form class="form-horizontal" role="form" 
+			style='padding:5px;background:#EEEEEE;border:solid 1px #DDDDDD;'>
+	  <div class="form-group">
+	    <label for="inputDate" class="col-lg-2 control-label">日期</label>
+	    <div class="col-lg-10">
+	      <input name='date' type="text" class="form-control" id="inputDate" placeholder="{$today}" value='{$today}'>
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <label for="inputTime" class="col-lg-2 control-label">时间</label>
+	    <div class="col-lg-10">
+	      <input name='time' type="text" class="form-control" id="inputTime" value='0' placeholder="Log Time">
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <label for="inputType" class="col-lg-2 control-label">方式</label>
+	    <div class="col-lg-10">
+	      <select name='type' id='inputType'>
+	      	<option>面谈</option>
+	      	<option>电话</option>
+	      	<option>短信</option>
+	      	<option>微信</option>
+	      	<option>QQ</option>
+	      	<option>Email</option>
+	      	<option>转述</option>
+	      </select>
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <label for="inputAbout" class="col-lg-2 control-label">相关人</label>
+	    <div class="col-lg-10">
+	      <input name='about' type="text" class="form-control" id="inputAbout" placeholder="Log About" onkeyup='checkExistName(this)'>
+	      <input name='ids' type="hidden" class="form-control" id="inputIds" placeholder="Log About">
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <label for="inputContent" class="col-lg-2 control-label">内容</label>
+	    <div class="col-lg-10">
+	      <textarea name='content' type="text" class="form-control" id="inputContent" placeholder="描述" style='height:150px;'></textarea>
+	    </div>
+	  </div>
+
+	</form>
+
+	<br/>
+	<div class="form-group">
+	<div class="col-lg-offset-2 col-lg-10">
+	  <button type="submit" class="btn btn-primary" onclick='doaddLog()'>Add　It !</button>
+	</div>
+	</div>
+
+</div>
+
+<div class='col-xs-6' id='right-tip'>
+
+</div>
+</div>
+
+<script>
+{literal}
+// TODO: 对于扩展插件之后，姓名，昵称，手机号的该怎么检查呢？
+function checkExistName(me)
+{
+	//name = $('#inputName').val();
+	name = $(me).val();
+	$.getJSON('/person/getpersonbyname?name='+name,function(data){
+		if(data.ret)
+		{
+			links = '';
+			for(i in data.data)
+			{
+				//links = links + '<div>'+data.data[i].id+'.'+data.data[i].name+'('+data.data[i].nickname+')'+'</div>';
+				links = links + '<div><span style="width:28px;display:inline-block;">'+data.data[i].id+'</span><a href="###" onclick="setUser('+data.data[i].id+",\'"+data.data[i].name+'\')">'+data.data[i].name+'('+data.data[i].nickname+') '+data.data[i].addtime+'</a></div>';
+			}
+			$('#right-tip').html(links);
+		}
+		else
+		{
+			$('#right-tip').html(data.msg);
+		}
+	});
+}
+
+function checkExistMobile(phone)
+{
+	name = $(phone).val();
+	
+	$.getJSON('/person/getpersonbymobile?name='+name,function(data){
+		if(data.ret)
+		{
+			links = '';
+			for(i in data.data)
+			{
+				links = links + '<div><span style="width:28px;display:inline-block;">'+data.data[i].id+'</span><a href="/person/show?id='+data.data[i].id+'">'+data.data[i].name+'('+data.data[i].nickname+')'+'</a></div>';
+			}
+			$('#right-tip').html(links);
+		}
+		else
+			$('#right-tip').html(data.msg);
+	});
+}
+function checkExistEmail()
+{
+	name = $('#inputEmail').val();
+
+	$.getJSON('/person/getpersonbyemail?name='+name,function(data){
+		if(data.ret)
+		{
+			links = '';
+			for(i in data.data)
+			{
+				links = links + '<div><span style="width:28px;display:inline-block;">'+data.data[i].id+'</span><a href="/person/show?id='+data.data[i].id+'">'+data.data[i].name+'('+data.data[i].nickname+')'+'</a></div>';
+			}
+			$('#right-tip').html(links);
+		}
+		else
+			$('#right-tip').html(data.msg);
+	});
+}
+function checkCompany()
+{
+	name = $('#inputCompany').val();
+	$.getJSON('/person/getcompanyname?name='+name,function(data){
+		if(data.ret)
+		{
+			links = '';
+			for(i in data.data)
+			{
+				links = links + '<div style="cursor:pointer;" onclick=\'setCompany("'+data.data[i].company+'","'+data.data[i].company_address+'","'+data.data[i].company_zipcode+'")\'>'+data.data[i].company+'('+data.data[i].company_address+')'+'</div>';
+			}
+			$('#right-tip').html(links);
+		}
+		else
+			$('#right-tip').html(data.msg);
+	});	
+}
+
+function setUser(id, name)
+{
+	$('#inputAbout').val(name);
+	$('#inputIds').val(id);
+}
+
+function setCompany(company,address,zipcode)
+{
+	$('#inputCompany').val(company);
+	$('#inputAddress').val(address);
+	$('#inputZipcode').val(zipcode);
+}
+function doaddLog()
+{
+	// TODO: check person's info , for name,company, phone, email 
+	$.post('/log/doaddLog',$('form').serialize(),function(data){
+		if(data.ret)
+		{
+			window.location='/log/add';
+		}
+		else
+		{
+			$('#right-tip').html(data.msg);
+		}
+	},'json');
+
+}
+function body_ready()
+{
+	$('#inputName').focus();
+}
+{/literal}
+</script>
+
+

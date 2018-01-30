@@ -1,0 +1,30 @@
+
+<form method='POST' action='/pcrm/doAddPerson'>
+
+<div class='row' style='margin-top:100px;'>
+
+	<div class='span1'><h4>用户名</h4></div>
+	<div class='span2' style='font-size:30px;'><input class='span2' name='personname' style='font-size:24px;' onkeyup='find(this)'></div>
+	<div class='span2' ><button class='btn btn-large'>添 加 </button></div>
+</div>
+</form>
+
+<div class='row'>
+<div id='tip' class='offset3 span3'></div>
+</div>
+
+<script type='text/javascript'>
+{literal}
+function find(me)
+{
+	var text = '';
+	$.getJSON('/pcrm/getPersonNamesLike/?like='+me.value,function(data){
+		$.each(data, function(key,val){
+			text += '<div class="row">'+val.name+'('+val.nickname+')</div>';
+		});
+		$('#tip').html(text);
+	});
+	
+}
+{/literal}
+</script>

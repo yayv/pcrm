@@ -1,0 +1,17 @@
+<div class='row'>
+	<ul class='list-inline'>
+{foreach from=$tags item=tag key=i}
+	<li><a href='/tags/{$tag.tagname}'>{$tag.tagname}</a></li>
+{/foreach}
+	</ul>
+	<h2>或</h2>
+	<a href='/tags/notag'>无标签</a>
+</div>
+
+<script>
+{literal}
+
+{/literal}
+</script>
+
+

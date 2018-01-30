@@ -1,0 +1,217 @@
+<div class='row'>
+<div class='col-xs-6' style='padding:5px;'>
+	<div class='label label-default'>名片</div>
+	<form class="form-horizontal" role="form" 
+			style='padding:5px;background:#EEEEEE;border:solid 1px #DDDDDD;'>
+	  <div class="form-group">
+	    <label for="inputName" class="col-lg-2 control-label">姓名</label>
+	    <div class="col-lg-10">
+	      <input name='name' type="name" class="form-control" id="inputName" placeholder="Person's Name" onkeyup='checkExistName(this)'>
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <label for="inputNickname" class="col-lg-2 control-label">昵称</label>
+	    <div class="col-lg-10">
+	      <input name='nickname' type="nickname" class="form-control" id="inputNickname" placeholder="Person's Nickname" onkeyup='checkExistName(this)'>
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <label for="inputPhone" class="col-lg-2 control-label">电话</label>
+	    <div class="col-lg-10">
+	      <input name='phone1' type="phone" class="form-control" id="inputPhone1" placeholder="Phone Number" onkeyup='checkExistMobile(this)'>
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <label for="inputPhone" class="col-lg-2 control-label">电话</label>
+	    <div class="col-lg-10">
+	      <input name='phone2' type="phone" class="form-control" id="inputPhone2" placeholder="Phone Number" onkeyup='checkExistMobile(this)'>
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <label for="inputEmail" class="col-lg-2 control-label">email</label>
+	    <div class="col-lg-10">
+	      <input name='email' type="email" class="form-control" id="inputEmail" placeholder="Email" onkeyup='checkExistEmail()'>
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <div class="col-lg-offset-2 col-lg-10">
+	      <div class="radiobox">
+	        <label>
+				<label class="radio-inline">
+				  <input name='gender' type="radio" id="inlineCheckbox1" value="male"> 男
+				</label>
+				<label class="radio-inline">
+				  <input name='gender' type="radio" id="inlineCheckbox2" value="female"> 女
+				</label>
+	        </label>
+	      </div>
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <label for="inputVocation" class="col-lg-2 control-label">行业</label>
+	    <div class="col-lg-10">
+	      <input name='vocation' type="vocation" class="form-control" id="inputVocation" placeholder="Vocation">
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <label for="inputCompany" class="col-lg-2 control-label">公司/学校</label>
+	    <div class="col-lg-10">
+	      <input name='company' type="phone" class="form-control" id="inputCompany" placeholder="Company" onkeyup='checkCompany()'>
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <label for="inputDepartment" class="col-lg-2 control-label">部门</label>
+	    <div class="col-lg-10">
+	      <input name='department' type="phone" class="form-control" id="inputDepartment" placeholder="Department">
+	    </div>
+	  </div>
+
+	  <div class="form-group">
+	    <label for="inputJob" class="col-lg-2 control-label">职位</label>
+	    <div class="col-lg-10">
+	      <input name='jobtitle' type="name" class="form-control" id="inputJob" placeholder="Job Title">
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <label for="inputAddress" class="col-lg-2 control-label">地址</label>
+	    <div class="col-lg-10">
+	      <input name='companyaddress' type="phone" class="form-control" id="inputAddress" placeholder="Company's Address">
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <label for="inputZipcode" class="col-lg-2 control-label">邮编</label>
+	    <div class="col-lg-10">
+	      <input name='companyzipcode' type="phone" class="form-control" id="inputZipcode" placeholder="Company's Zipcode">
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <label for="inputNote" class="col-lg-2 control-label">备注</label>
+	    <div class="col-lg-10">
+	      <input name='note' type="note" class="form-control" id="inputNote" placeholder="Person's Note">
+	    </div>
+	  </div>
+
+	</form>
+
+	<br/>
+	<div class="form-group">
+	<div class="col-lg-offset-2 col-lg-10">
+	  <button type="submit" class="btn btn-primary" onclick='doaddperson()'>Add　It !</button>
+	</div>
+	</div>
+
+</div>
+
+<div class='col-xs-6' id='right-tip'>
+
+</div>
+</div>
+
+<script>
+{literal}
+// TODO: 对于扩展插件之后，姓名，昵称，手机号的该怎么检查呢？
+function checkExistName(me)
+{
+	//name = $('#inputName').val();
+	name = $(me).val();
+	$.getJSON('/person/getpersonbyname?name='+name,function(data){
+		if(data.ret)
+		{
+			links = '';
+			for(i in data.data)
+			{
+				//links = links + '<div>'+data.data[i].id+'.'+data.data[i].name+'('+data.data[i].nickname+')'+'</div>';
+				links = links + '<div><span style="width:28px;display:inline-block;">'+data.data[i].id+'</span><a href="/personinfo/show?id='+data.data[i].id+'">'+data.data[i].name+'('+data.data[i].nickname+') '+data.data[i].addtime+'</a></div>';
+			}
+			$('#right-tip').html(links);
+		}
+		else
+		{
+			$('#right-tip').html(data.msg);
+		}
+	});
+}
+
+function checkExistMobile(phone)
+{
+	name = $(phone).val();
+	
+	$.getJSON('/person/getpersonbymobile?name='+name,function(data){
+		if(data.ret)
+		{
+			links = '';
+			for(i in data.data)
+			{
+				links = links + '<div><span style="width:28px;display:inline-block;">'+data.data[i].id+'</span><a href="/personinfo/show?id='+data.data[i].id+'">'+data.data[i].name+'('+data.data[i].nickname+')'+'</a></div>';
+			}
+			$('#right-tip').html(links);
+		}
+		else
+			$('#right-tip').html(data.msg);
+	});
+}
+function checkExistEmail()
+{
+	name = $('#inputEmail').val();
+
+	$.getJSON('/person/getpersonbyemail?name='+name,function(data){
+		if(data.ret)
+		{
+			links = '';
+			for(i in data.data)
+			{
+				links = links + '<div><span style="width:28px;display:inline-block;">'+data.data[i].id+'</span><a href="/personinfo/show?id='+data.data[i].id+'">'+data.data[i].name+'('+data.data[i].nickname+')'+'</a></div>';
+			}
+			$('#right-tip').html(links);
+		}
+		else
+			$('#right-tip').html(data.msg);
+	});
+}
+function checkCompany()
+{
+	name = $('#inputCompany').val();
+	$.getJSON('/person/getcompanyname?name='+name,function(data){
+		if(data.ret)
+		{
+			links = '';
+			for(i in data.data)
+			{
+				links = links + '<div style="cursor:pointer;" onclick=\'setCompany("'+data.data[i].company+'","'+data.data[i].company_address+'","'+data.data[i].company_zipcode+'")\'>'+data.data[i].company+'('+data.data[i].company_address+')'+'</div>';
+			}
+			$('#right-tip').html(links);
+		}
+		else
+			$('#right-tip').html(data.msg);
+	});	
+}
+
+function setCompany(company,address,zipcode)
+{
+	$('#inputCompany').val(company);
+	$('#inputAddress').val(address);
+	$('#inputZipcode').val(zipcode);
+}
+function doaddperson()
+{
+	// TODO: check person's info , for name,company, phone, email 
+	$.post('/person/doaddPerson',$('form').serialize(),function(data){
+		if(data.ret)
+		{
+			window.location='/person/add';
+		}
+		else
+		{
+			$('#right-tip').html(data.msg);
+		}
+	},'json');
+
+}
+function body_ready()
+{
+	$('#inputName').focus();
+}
+{/literal}
+</script>
+
+

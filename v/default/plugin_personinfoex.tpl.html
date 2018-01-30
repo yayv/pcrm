@@ -1,0 +1,34 @@
+<form action='/plugins/updatePersoninfoEx' method='POST'>
+<input name='personid' value='{$person.id}' type='hidden'>
+
+<textarea name='personinfoex' class='col-xs-12' style='height:300px'>
+{if $mpersoninfoex.infoex_text}
+{$mpersoninfoex.infoex_text}
+{else}
+身份证号=
+生日=
+住址=
+住址邮编=
+户籍=
+家乡=
+婚姻=
+教育程度=
+毕业时间=
+毕业学校=
+所学专业=
+身高=
+体重=
+年收入=
+汽车型号=甲年购乙牌丙型@京A00000
+爱好=颜色/运动/食物
+忌讳=事情/食物
+父亲=
+母亲=
+妻子=
+丈夫=
+儿子=
+女儿=
+{/if}
+</textarea>
+<button class='text-center col-xs-12 btn btn-primary'>更新信息</button>
+</form>
